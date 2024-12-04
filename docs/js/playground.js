@@ -10,27 +10,10 @@ $(document).ready(function() {
         }
     ];
 
-    const interests = [
-        {
-            tags: "Photoshop, Photography, Photo editing, Wallpaper",
-            projectURL: "https://www.dropbox.com/scl/fo/q2c3wbzg9t9305d898j69/ANxod_LF0z7-g1ZK-fN2r7E?rlkey=i1ev3znz2v7qmvrfmmqrygmza&st=rb3csgme&dl=0",
-            title: "Photography and Wallpaper Creation",
-            imgURL: "https://dl.dropboxusercontent.com/scl/fi/suyqjw5j7sqsu7ribc9m4/wallpaper_1.png?rlkey=77kn3ccm75b1aix2njgqgggoy&st=e1t4djus",
-            imgALT: "Demo image wallpaper",
-            goal: "I enjoy taking photographs and creatively editing them to design wallpapers."
-        }
-    ];
-
     $('#mini-projects-container').empty();
     miniprojects.forEach(project => {
         const projectCard = createProjectCard(project.tags, project.projectURL, project.title, project.imgURL, project.imgALT, project.goal);
         $('#mini-projects-container').append(projectCard);
-    });
-
-    $('#interests-container').empty();
-    interests.forEach(interest => {
-        const interestCard = createProjectCard(interest.tags, interest.projectURL, interest.title, interest.imgURL, interest.imgALT, interest.goal);
-        $('#interests-container').append(interestCard);
     });
 
     $('#search').on('keyup', function() {
