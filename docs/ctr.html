@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0;  user-scalable=0;" name="viewport">
+        <title>Click-Through Rate Prediction</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/project.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/project.css">
+        <link rel="icon" href="img/icon.png" type="image/png">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EHSZYMDK3M"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EHSZYMDK3M');
+        </script>
+    </head>
+    <body>
+        <div class="Nav"></div>
+
+        <div class="main-content">
+            <div class="project-overview-text"></div>
+            <script>
+                $(document).ready(function() {
+                    const date = "Sep 2023 - Dec 2023"
+                    const problem = "How can we build a model that improves advertising CTR prediction?";
+                    const context = `CTR is a ratio showing how often people who see ads or free product listing end up clicking it. 
+                                     CTR is the number of clicks that an ad receives divided by the number of times the ad is shown.
+                                     Accurately predicting the likelihood of a user clicking on an advertisement can increase the efficiency of targeted advertising.
+                                     This enables improved return on investment (ROI) and lower cost on advertising.`;
+                    const proposal = "This project aims to find the best model for the CTR (Click-Through Rate) prediction.";
+                    const role = "Machine Learning Engineer";
+                    const teammates = ["Liyang Song"];
+                    const tools = "Miniconda, Python, Matplotlib, Seaborn";
+                    const responsibilites = 'Exploratory data analysis, Data preparation, Modeling'
+
+                    const projectIntroHTML = createProjectIntroduction(date, problem, context, proposal, role, teammates, tools, responsibilites);
+                    $('.project-overview-text').html(projectIntroHTML);
+                });
+            </script>
+        </div>
+
+        <div class="divider-container">
+            <div class="divider"></div>
+            <div class="divider-text">Details</div>
+            <div class="divider"></div>
+        </div>
+
+        <div class="project-detail-ctr">
+            <div class="project-workflow">
+                <h4>Introduction</h4>
+                <p>
+                    Initially, the goal is to increase the efficiency of targeted advertising by accurately predicting the likelihood of a user clicking on an advertisement, enabling improved return on investment (ROI) and lower cost on advertising. 
+                    Therefore, we want to find the best model for the CTR (Click-Through Rate) prediction.
+                    There are many performance metrices to evaluate the model. 
+                    In our project, we decide to focus on minimizing false positives while balancing with other metrics. 
+                    We mainly consider precision or false positive rather than false negative because the project target is recommending advertisements to users based on the click rate prediction. 
+                    As a result, higher false positive would show more advertisements that the user would be less likely to click. 
+                    And this could make the user feel less engaged and tend the leave the application. 
+                </p>
+                <img src="/img/ctr_1.jpg">
+                <img src="/img/ctr_2.jpg">
+            </div>
+            <div class="project-result">
+                <h4>Presentation</h4>
+                <p>
+                    Gradient Boosting Classifier has very high Precision (which is what we demands firstly) and a very high recall. 
+                    It would be the ideal model for production.
+                </p>
+                <img src="/img/ctr_model.jpg">
+            </div>
+            <div class="project-outside-url">
+                <a href="https://github.com/PennyY1103/Advertisement-CTR-Prediction.git" target="_blank">Interested in the process?</a>
+            </div>
+        </div>
+
+        <div class="Footer"></div>
+
+    </body>
+</html>

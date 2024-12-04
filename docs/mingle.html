@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0;  user-scalable=0;" name="viewport">
+        <title>Mingle Social App</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/project.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/project.css">
+        <link rel="icon" href="img/icon.png" type="image/png">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EHSZYMDK3M"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EHSZYMDK3M');
+        </script>
+    </head>
+    <body>
+        <div class="Nav"></div>
+
+        <div class="project-overview-img" style="background-image: url('/img/mingle.png');">
+        </div>
+        <div class="main-content">
+
+            <div class="project-overview-text"></div>
+            <script>
+                $(document).ready(function() {
+                    const date = "Aug 2020 - Sep 2020"
+                    const problem = "How can we design an app that fosters better communication among kids outside of school and helps address mental health issues?";
+                    const context = `The theme for this summer's project is "All Things Kids." 
+                                     We've discussed several problems that kids face today, including mental health issues, bullying, and conflicts with family and friends. 
+                                     Given that this project was developed during the COVID-19 pandemic, we also considered how the pandemic has impacted kids' well-being and learning. 
+                                     For example, kids have struggled with connecting with their peers as easily through class. <br>
+                                     Given this situation, we thought it would be worthwhile to develop an application that helps kids find balance and deal with the challenges of our world by connecting with their peers. 
+                                     This app would be particularly relevant in today's context, with the heavy reliance on online friendships and communication.`;
+                    const proposal = "This project aims to create a safe online environment for kids to make friends.";
+                    const role = "UI/UX Designer";
+                    const teammates = ["Evelynne", "SK", "Shirley", "Raya", "Gilbert"];
+                    const tools = "Figma, Photoshop, Premiere";
+                    const responsibilites = 'User Personas, Storyboarding, Interactive Prototyping, Competitive Analysis, Video Editing'
+
+                    const projectIntroHTML = createProjectIntroduction(date, problem, context, proposal, role, teammates, tools, responsibilites);
+                    $('.project-overview-text').html(projectIntroHTML);
+                });
+            </script>
+            <div class="divider-container">
+                <div class="divider"></div>
+                <div class="divider-text">Details</div>
+                <div class="divider"></div>
+            </div>
+            <div class="project-detail-text-ux"></div>
+            <script>
+                $(document).ready(function() {
+                    const intro = `This app, Mingle, is designed to provide a safe environment to high schoolers wanting to make friends. 
+                                   The prototype contains five main parts including signup pages, swiping pages, matched user lists, conversation pages, setting and filter pages. 
+                                   We decided to consider identity verification, detailed filters, swiping, and grouping matching as our core features after finishing competitor analysis.`;
+                    const features = [{url: '/img/mingle_id_verify.png', title: 'Identity Verification', text: "Many social apps on the market don't require users to pass any identity verification before signing up for an account. Although the registration steps are simplified, no requirement on verification can bring potential risks. Since our app is designed for high school students, ensuring the safety is more important. Therefore, in our prototype, students need to upload their high school ID to successfully sign up an account."},
+                                      {url: '/img/mingle_filter_1.png', title: 'Profile Filter', text: 'Compared to other social apps, Mingle gives users more options to decide profiles they want to see.'},
+                                      {url: '/img/mingle_filter_2.png', title: 'Interest Filter', text: 'Advanced filter page allows users to filter profiles based on interests.'},
+                                      {url: '/img/mingle_swiping.png', title: 'Swiping', text: "The swiping pages are pages that you can match with other users. We added a button (view full profile) at the bottom of profile pictures; therefore, users can view other's full profiles before making a decision."},
+                                      {url: '/img/mingle_match.png', title: 'Group Matching', text: 'This app also allows users to make new friends in groups. All users who mutually match with others can chat in a group. We added a group conversation in the chatting page to better illustrate how group matching works. And group matching setting allows users to control the size of group they want to join and interests.'}];
+                    const result = 'https://drive.google.com/file/d/1CbyBbAAo1V4xWpSjI63hY-iAHABKRc-U/preview';
+                    const more = 'https://medium.com/@EqUIlibriumTeam';
+
+                    const projectDetailHTML = createProjectDetailUX(intro, features, result, more);
+                    $('.project-detail-text-ux').html(projectDetailHTML);
+                });
+            </script>
+        </div>
+
+        <div class="Footer"></div>
+
+    </body>
+</html>
