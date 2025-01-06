@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0;  user-scalable=0;" name="viewport">
+        <title>Automated Assessment of Inland Flooding</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/project.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/project.css">
+        <link rel="icon" href="img/icon.png" type="image/png">
+    </head>
+    <body>
+        <div class="Nav"></div>
+
+        <div class="project-overview-img" style="background-image: url('img/flood_sentinel2.png');">
+            <h1>Automated Assessment of Inland Flooding</h1>
+            <p>An algorithm for automated assessment of inland flooding from satellite observations</p>
+        </div>
+        <div class="main-content">
+
+            <div class="project-overview-text"></div>
+            <script>
+                $(document).ready(function() {
+                    const date = "May 2024 - Aug 2024"
+                    const problem = "How can we enhance the flooded area assessment?";
+                    const context = `The New England Region faces challenges from inland flooding over years. 
+                                    Flood events can cause serious damage, such as infrastructure destruction and water system pollution. 
+                                    To mitigate risks to people and property, it's crucial to quantify the impacts of flood events. 
+                                    However, many of the online flood reports and maps often lack detailed documentation or visualization of specific regions/areas affected by flood events, especially for relatively small-scale events (occurring in small regions/short time periods). 
+                                    Therefore, developing a more precise approach to assess the extent of flood events is needed.`;
+                    const proposal = `This project focuses on developing an algorithm for automated assessment of inland flooding from satellite observations. Specifically, this algorithm collects satellite images captured before/during/after flood events and applies the K-means clustering algorithm to automatically identify flooded areas.
+                                      Moreover, this approach seeks to offer insights into enhancing flood detection using drone-based measurements which are not affected by cloud cover.`;
+                    const role = "Data Engineer, Data Analyst, Machine Learning Engineer";
+                    const teammates = ["Philip Bogden (Supervisor)", "Samuel G. Roy (Stakeholder)"];
+                    const tools = "Miniconda, Python, Beautifulsoup4, Matplotlib, Seaborn, GeoPandas, Google Cloud App Engine, Google Earth Engine, Rasterio";
+                    const responsibilites = 'Data collection, Data cleaning, Exploratory data analysis, Data preparation, Modeling'
+
+                    const projectIntroHTML = createProjectIntroduction(date, problem, context, proposal, role, teammates, tools, responsibilites);
+                    $('.project-overview-text').html(projectIntroHTML);
+                });
+            </script>
+
+            <div class="project-diagram-text"></div>
+            <script>
+                $(document).ready(function() {
+                    const summary = ['Step 1: Formulate question', 'Step 2: Collect flood event data', 'Step 3: Preprocess and analyze flood event data',
+                                     'Step 4: Retrieve satellite imagery', 'Step 5: Preprocess and analyze satellite imagery', 'Step 6: Collect and preprocess additional data',
+                                     'Step 7: Segment images using K-means clustering', 'Step 8: Optimize K-means performance', 'Step 9: Evaluate the result']
+                    const step1 = ['Formulate problem;', 
+                                      'Conduct literature review;', 
+                                      'Define major question.'];
+                    const step2 = ['Collect high-water marks (USGS STN Flood Data Portal);', 
+                                   'Collect high-water levels (USGS Water Data Services).'];
+                    const step3 = ['Remove unwanted attributes and instances;',
+                                    'Handle duplicate/NaN values;',
+                                    'Visualize flood event data.'];
+                    const step4 = ['Collect Sentinel-2 imagery;', 
+                                   'Collect Cloud/Shadow layer;',
+                                   'Collect Normalized Difference Water Index (NDWI) layer.'];
+                    const step5 = ['Create a DataFrame to store image information;', 
+                                   'Analyze the image to identify the optimal images.'];
+                    const step6 = ['Collect flowline from National Hydrography Dataset;', 
+                                   'Define threshold for NDWI layer.'];
+                    const step7 = ['Standardize image data;',
+                                   'Run the default K-means algorithm.'];
+                    const step8 = ['Add different features (NDWI and flowline);', 
+                                   'Apply Principle Component Analysis (PCA).'];
+                    const step9 = ['Visual inspection;', 'Flooded area calculation and comparison.']
+
+                    const projectDiagramHTML = createProjectProgressDS(summary, step1, step2, step3, step4, step5, step6, step7, step8, step9);
+                    $('.project-diagram-text').html(projectDiagramHTML);
+                });
+            </script>
+
+            <div class="project-detail-text-ds"></div>
+            <script>
+                $(document).ready(function() {
+                    const question = `This project focuses on developing an algorithm for automated assessment of inland flooding from satellite observations. 
+                                      Specifically, this algorithm collects satellite images captured before/during/after flood events and applies the K-means clustering algorithm to automatically identify flooded areas.<br>
+                                      Satellite data, particularly from Sentinel-2 with its 10-meter resolution, provides a powerful tool for observing and analyzing flood events in detail. 
+                                      While weather conditions such as heavy cloud cover during flood events can be challenging,the use of satellite imagery and machine learning techniques remains valuable. 
+                                      Satellite imagery offers broad and near real-time coverage that helps enhance the ability to monitor and assess flooded areas. 
+                                      Moreover, this approach seeks to offer insights into enhancing flood detection using drone-based measurements which are not affected by cloud cover.<br>
+                                      <strong>Area of Interests</strong>: The project initially focused on Maine. However, due to limited flood event observations in Maine, it has been expanded to include other states in the New England Region (primarily Vermont) which shares similar flood characteristics.`;
+                    const collect = `
+                                    <table class="data-collection-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Source</th>
+                                                <th>Description</th>
+                                                <th>Format</th>
+                                                <th>Link</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="https://www.usgs.gov/special-topics/water-science-school/science/high-water-marks-and-flooding" target="_blank">High-water marks</a></td>
+                                                <td><a href="https://stn.wim.usgs.gov/STNDataPortal/" target="_blank">STN flood event data</a></td>
+                                                <td>validated flood event observations from USGS</td>
+                                                <td>CSV</td>
+                                                <td><a href="https://drive.google.com/drive/folders/1iFKHeHfNnRrpxUlsN3PIxYGxEh9IeB3n?usp=sharing" target="_blank">Data</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://www.weather.gov/aprfc/terminology" target="_blank">High-water levels</a></td>
+                                                <td><a href="https://waterdata.usgs.gov/nwis/rt" target="_blank">USGS Water Data Services</a></td>
+                                                <td>real-time gauge water levels above moderate flood stage</td>
+                                                <td>CSV</td>
+                                                <td><a href="https://drive.google.com/drive/folders/1iFKHeHfNnRrpxUlsN3PIxYGxEh9IeB3n?usp=sharing" target="_blank">Data</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://developers.google.com/earth-engine/datasets/catalog/sentinel-2" target="_blank">Sentinel-2 images</a></td>
+                                                <td><a href="https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED" target="_blank">Sentinel-2 Level-2A</a></td>
+                                                <td>satellite images corresponding to the areas of interests and timeframes defined by high-water marks and levels</td>
+                                                <td>GeoTIFF</td>
+                                                <td><a href="https://drive.google.com/drive/folders/1iFKHeHfNnRrpxUlsN3PIxYGxEh9IeB3n?usp=sharing" target="_blank">Data</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://developers.google.com/earth-engine/tutorials/community/sentinel-2-s2cloudless" target="_blank">Cloud and Shadow masks</a></td>
+                                                <td><a href="https://developers.google.com/earth-engine/tutorials/community/sentinel-2-s2cloudless" target="_blank">s2cloudless</a></td>
+                                                <td>cloud and shadow masks representing the noisy pixels to be removed (masks downloaded when collecting Sentinel-2 images)</td>
+                                                <td>GeoTIFF</td>
+                                                <td><a href="https://drive.google.com/drive/folders/1iFKHeHfNnRrpxUlsN3PIxYGxEh9IeB3n?usp=sharing" target="_blank">Data</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://eos.com/make-an-analysis/ndwi/" target="_blank">NDWI masks</a></td>
+                                                <td><a href="https://medium.com/@melqkiades/water-detection-using-ndwi-on-google-earth-engine-2919a9bf1951" target="_blank">NDWI tutorial</a></td>
+                                                <td>water body pixels defined by Normalized Difference Water Index (masks downloaded when collecting Sentinel-2 images)</td>
+                                                <td>GeoTIFF</td>
+                                                <td><a href="https://drive.google.com/drive/folders/1iFKHeHfNnRrpxUlsN3PIxYGxEh9IeB3n?usp=sharing" target="_blank">Data</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://www.usgs.gov/ngp-standards-and-specifications/national-hydrography-dataset-nhd-data-dictionary-feature-classes" target="_blank">Flowlines masks</a></td>
+                                                <td><a href="https://www.usgs.gov/national-hydrography/access-national-hydrography-products" target="_blank">National Hydrography Dataset</a></td>
+                                                <td>routes that make up a linear surface water drainage network</td>
+                                                <td>Shapefile</td>
+                                                <td><a href="https://drive.google.com/drive/folders/1iFKHeHfNnRrpxUlsN3PIxYGxEh9IeB3n?usp=sharing" target="_blank">Data</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                `;
+                    const clean = `Data cleaning for high-water marks and high-water levels focuses on dropping duplicate observations and extracting the most relevant attributes. 
+                                   For instance, a single location might have multiple high-water marks, each with different elevation values. 
+                                   However, since this project primarily relies on the location and date attributes of these high-water marks, 
+                                   duplicate observations could be included without careful examination. 
+                                   Therefore, it's crucial to identify and remove these duplicates to ensure the accuracy and reliability of the data used in the analysis.<br>
+                                   Data cleaning for Sentinel-2 images is relatively more complex. The workflow is describe below.
+                                   <img src="img/s2_workflow.png" class="workflow-img">`;
+                    const eda = `
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>High-Water Marks</th>
+                                            <th>High-Water Levels</th>
+                                            <th>Sentinel-2 Natural Color Images</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>The original dataset has 53 attributes and 3502 observations. The filtered dataset has 8 attributes and 889 observations.</td>
+                                            <td>The ready-to-use dataset of high-water levels has 9 attributes and 218 observations. The filtering steps are implemented when collecting the dataset. Therefore, the downloaded dataset is already cleaned.</td>
+                                            <td>1107 flood event observations are used to collect Sentinel-2 images. Due to the adverse weather during flood events and the time lapse of Sentinel-2, the filtered dataset of images contains 69 images.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="img/countplot_stn.png"></td>
+                                            <td><img src="img/countplot_gauge.png"></td>
+                                            <td><img src="img/countplot_sentinel2.png"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                `;
+                    const train = `
+                                    <p>To automate the assessment of flooded areas, I select the K-means clustering algorithm, a commonly used method in image segmentation. 
+                                        The decision to use K-means clustering is based on three crucial factors: the small dataset size (69 images), the absence of ground truth for the flooded areas, and the unique visual characteristics of the flooded areas (brown water bodies caused by sediment). 
+                                        K-means clustering algorithm groups data points based on similarity. When only image data is used, this similarity is based on color; when additional features are introduced, the similarity is calculated based on the combination.</p>
+                                    
+                                    <p>Below is a table with the results of one image: </p>
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Approach</th>
+                                                <th>Natural Color Sentinel-2</th>
+                                                <th>Result</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Default</td>
+                                                <td><img src="img/44909_20230711_s2_flowline.png"></td>
+                                                <td><img src="img/44909_20230711_default.png"><br>In the default K-means clustering result, Cluster 1 includes the flooded area. However, some of other areas such as roads and urban structures are also considered as the flooded area.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>PCA</td>
+                                                <td><img src="img/44909_20230711_s2_flowline.png"></td>
+                                                <td><img src="img/44909_20230711_pca_i.png"><br>Principle Component Analysis is applied to reduce the noise. Cluster 1 includes the flooded area. PCA effectively reduces the impact of noisy or irrelevant data.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Flowline with PCA</td>
+                                                <td><img src="img/44909_20230711_s2_flowline.png"></td>
+                                                <td><img src="img/44909_20230711_flowline_pca_i.png"><br>Under this combination, the results are less accurate compared to when PCA is applied to the image data alone. Cluster 2 contains few pixels that it is not possible to display them effectively.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>NDWI with PCA</td>
+                                                <td><img src="img/44909_20230711_s2_flowline.png"></td>
+                                                <td><img src="img/44909_20230711_ndwi_pca_i.png"><br>This result is the most accurate and effective outcome. Cluster 2 is the flooded area.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Flowline and NDWI with PCA</td>
+                                                <td><img src="img/44909_20230711_s2_flowline.png"></td>
+                                                <td><img src="img/44909_20230711_features_pca_i.png"><br>This outcome is similar to the result obtained using the flowline mask with PCA.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    <p>More details are included in the GitHub repo which will become public later.</p>
+                                  `;
+                    const eval = `
+                                 <p>
+                                    Based on the analysis of the clustered images, the combination of NDWI mask and PCA outputs the best result. 
+                                    Therefore, further analysis is conducted by comparing the best result and NDWI mask.
+                                    Because optimization of K-means clustering algorithms are applied to images individually, the selected optimal n_components and n_clusters clusters can vary between images. 
+                                    To automatically identify the cluster representing the flooded area, NDWI mask is used. 
+                                    The overlap between the NDWI mask and each cluster is calculated, with the cluster showing the highest overlap being identified as the flooded area. 
+                                    Below is comparison between NDWI and the best result.
+                                 </p>
+                                 <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>S2</th>
+                                            <th>NDWI</th>
+                                            <th>Best Result</th>
+                                            <th>Pixel Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><img src="img/44909_20230711_s2_flowline.png"></td>
+                                            <td><img src="img/44909_20230711_ndwi.png"></td>
+                                            <td><img src="img/44909_20230711_ndwi_pca_i.png"><br>Compared to NDWI mask, the noisy pixels and the water bodies with clear water in the best result are reduced. The reduction is also reflected in the number of pixels.</td>
+                                            <td>NDWI pixels: 37389<br>Targeted Cluster pixels: 36039</td>
+                                        </tr>
+                                    </tbody>
+                                 </table>
+                                 <br>
+                                 <h5>Insights</h5>
+                                 <p>
+                                    The New England region has experienced a significant number of recent flood events, with 1,107 observations highlighting the challenges of inland and coastal flooding. 
+                                    Therefore, developing effective methods for assessing flooded areas is critical. 
+                                    However, the weather conditions during flood events, particularly heavy cloud cover, pose challenges in collecting a large number of high-quality Sentinel-2 images. 
+                                    Additionally, due to the timing of Sentinel-2, flood events may not be captured. 
+                                    Based on these flood event observations, 379 images are collected, and only 69 of those are ideal.</p>
+                                
+                                 <p>
+                                    The analysis of the default K-means clustering algorithm across various images reveals that environmental characteristics significantly influence the results. 
+                                    When the features in an image are primarily flooded areas and green land, the default K-means algorithm can extract the majority of the flooded regions with relatively small noisy pixels. 
+                                    However, in more complex environments, optimizing the algorithm becomes crucial, as the flooded areas are more likely to be mixed with other noisy pixels.</p>
+
+                                    Different optimization approaches have different results. 
+                                    For instance, when combining the NDWI mask with PCA, NDWI tends to dominate the outcome, having a strong influence on the result. 
+                                    Additionally, the same optimization technique can produce different effects depending on the environmental characteristics of the images. 
+                                    These results need to further investigated to understand the process and improve the optimization approach used.
+                                 </p>
+                                 `;
+                    const imgURL = 'img/workflow.png'
+
+                    const projectDetailHTML = createProjectDetailDS(question, collect, clean, eda, train, eval, imgURL);
+                    $('.project-detail-text-ds').html(projectDetailHTML);
+                });
+            </script>
+
+            <div class="project-report">
+                <h2>Report</h2>
+                <p>
+                    <iframe src="https://www.dropbox.com/scl/fi/z3x2bygsf74stpc5n5m88/Flood-Project-Report.pdf?rlkey=9zu58d2rribghxjrduqoqsw97&raw=1">
+                        Your browser does not support iframes. Please use a different browser to view this document.
+                    </iframe>
+                </p>
+            </div>
+
+            <div class="project-reflect">
+                <h2>Reflection</h2>
+                <h4>Methodology</h4>
+                <p>
+                    <strong>Firstly</strong>, the current approach to extracting major rivers from flowline datasets can be improved. Samuel Roy, a scientist from USGS, suggests that stream order selection is helpful in identifying major rivers. By adding this modification, the flowline mask in the optimization process might be more helpful.<br>
+                    <strong>Secondly</strong>, the optimization process can be improved by exploring various ways to combine the features (NDWI and flowline) and techniques (StandardScaler and PCA) currently in use. Each combination of these elements can produce different results, and selecting the optimal combination is crucial for enhancing the model's performance.<br>
+                    <strong>Thirdly</strong>, one of the initial datasets included in this proposal is the Digital Elevation Model (DEM). Because flood event observations often come with elevation values, integrating DEM data can provide valuable insights. However, high-water marks from the STN (Short-Term Network) dataset need to be carefully processed. Some locations may have multiple high-water marks with different elevation values. Discussion with a professional will be necessary to ensure accuracy in the analysis.
+                </p>
+            </div>
+
+            <div class="project-reference-text"></div>
+            <script>
+                $(document).ready(function() {
+                    const data = [{url:'https://stn.wim.usgs.gov/STNDataPortal/', text: 'STN Flood Event Data Portal: high-water mark data'},
+                                  {url: 'https://hads.ncep.noaa.gov/charts/ME.shtml', text: 'Guage List for the New England Region (example link: ME)'},
+                                  {url: 'https://water.noaa.gov/gauges/ASTM1', text: 'Flood-related information for gauges from NOAA (example link: ASTM1)'},
+                                  {url: 'https://waterdata.usgs.gov/monitoring-location/01049320/#parameterCode=00065&period=P7D&showMedian=false', text: 'Historical water level above moderate flood stage value for gauges in the New England Region (example link: ASTM1)'},
+                                  {url: 'https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer', text: 'USGS National Hydrography Dataset'},
+                                  {url: 'https://developers.google.com/earth-engine/datasets/catalog/sentinel-2', text: 'Sentinel-2 from Google Earth Engine Data Catalog: satellite images'}
+                                 ];
+                    const paper = [{url: 'https://www.nature.com/articles/s43247-023-01129-1', text: 'A multi-sensor approach for increased measurements of floods and their societal impacts from space'},
+                                   {url: 'https://www.usgs.gov/special-topics/water-science-school/science/high-water-marks-and-flooding', text: 'High-water marks explanation: definition and use of high-water marks'}
+                                 ];
+                    const website = [{url: 'https://developers.google.com/earth-engine/tutorials/community/sentinel-2-s2cloudless', text: 'Sentinel-2 Cloud Masking with s2cloudless'}];
+                    const acknowledgement = ['Great thanks to my supervisor, Philip Bogden, for his guidance and support throughout my research, especially in helping me solve the challenges I faced.',
+                                            'Great thanks to Samuel Roy from USGS who provided many professional and valuable advices about the data sources and methodology.'];
+
+                    const projectReferenceHTML = createProjectReference(data, paper, website, acknowledgement);
+                    $('.project-reference-text').html(projectReferenceHTML)
+                })
+            </script>
+
+        </div>
+
+        <div class="Footer"></div>
+
+    </body>
+</html>

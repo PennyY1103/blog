@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0;  user-scalable=0;" name="viewport">
+        <title>Portland Travel Guide Web</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/project.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/project.css">
+        <link rel="icon" href="img/icon.png" type="image/png">
+    </head>
+    <body>
+        <div class="Nav"></div>
+        <div class="project-overview-img" style="background-image: url('img/travel_guide_home.png');">
+        </div>
+        <div class="main-content">
+
+            <div class="project-overview-text"></div>
+            <script>
+                $(document).ready(function() {
+                    const date = "May 2023 - Aug 2023"
+                    const intro = "In this project, we developed a web application to help travelers discover things to see and do in Portland, Maine.We list some of the best attractions and users can leave reviews/ratings. Besides, users can also contribute to the platform by suggesting new places to be added to the travel guide.";
+                    const role = "Frontend Developer";
+                    const teammates = ["Xichen Liu (Backend Developer)", "Sihan Bai (Frontend Developer)"];
+                    const tools = "Sketch, Figma, HTML, CSS, Javascript, Javascript libraries (such as React, Express), Google Cloud App Engine, MongoDB";
+                    const responsibilites = 'Prototyping, Frontend Design and Implementation (NAV/VISIT/EAT/ADVISING components), Frontend Deployment on Google Gloud App Engine'
+                    const prototype = 'https://groupxsq-frontend.ue.r.appspot.com/'
+
+                    const projectIntroHTML = createProjectIntroductionWEB(date, intro, role, teammates, tools, responsibilites, prototype);
+                    $('.project-overview-text').html(projectIntroHTML);
+                });
+            </script>
+            <div class="divider-container">
+                <div class="divider"></div>
+                <div class="divider-text">Details</div>
+                <div class="divider"></div>
+            </div>
+            <div class="project-detail-text-ux"></div>
+            <script>
+                $(document).ready(function() {
+                    const front_intro = `The client side implements everything users see and interact with. 
+                                         The Homepage gives a short introduction to Portland, ME. 
+                                         The VISIT/EAT page contain a list of attractions/restaurants. 
+                                         Users can click on LEARN MORE to check the detail of a attraction/restaurant. 
+                                         The ADVISING page allows users to submit a sugguestion form.`;
+                    const features = [{url: 'https://raw.githubusercontent.com/PennyY1103/portland-travel-web/main/XSQ-frontend/public/images/home3.png', 
+                                       title: 'HOME - Homepage', text: 'Users could see the lighthouse of Portland and use slide to see the introduction about Portland.'},
+                                      {url: 'https://raw.githubusercontent.com/PennyY1103/portland-travel-web/main/XSQ-frontend/public/images/visits3.png', 
+                                       title: 'VISIT', text: 'Users can explore a list of attractions and search/sort items based on their needs.'},
+                                      {url: 'https://raw.githubusercontent.com/PennyY1103/portland-travel-web/main/XSQ-frontend/public/images/eats3.png', 
+                                       title: 'EAT', text: 'Users can explore a list of restaurants and search/sort items based on their needs.'},
+                                      {url: 'https://raw.githubusercontent.com/PennyY1103/portland-travel-web/main/XSQ-frontend/public/images/advising3.png', 
+                                       title: 'ADVISING', text: "Users can submit a form if they have any sugguested location(attraction/restaurant)."}];
+                    const more = 'https://github.com/PennyY1103/portland-travel-web.git';
+
+                    const projectDetailHTML = createProjectDetailWEB(front_intro, features, more);
+                    $('.project-detail-text-ux').html(projectDetailHTML);
+                });
+            </script>
+
+        <div class="Footer"></div>
+
+    </body>
+</html>
