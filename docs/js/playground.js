@@ -4,7 +4,7 @@ $(document).ready(function() {
             tags: "Chrome Extension, JavaScript, Google Sheets, Tracker",
             projectURL: "https://github.com/PennyY1103/sheet-tracker-extension",
             title: "Google Sheets Tracker",
-            imgURL: "https://raw.githubusercontent.com/PennyY1103/sheet-tracker-extension/main/quicksave_demo_v2.gif",
+            imgURL: "https://raw.githubusercontent.com/PennyY1103/sheet-tracker-extension/main/PageTracker_demo_v2.gif",
             imgALT: "Demo image process",
             goal: "A Chrome extension that integrates with Google Sheets to track various items."
         }
